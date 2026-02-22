@@ -11,6 +11,9 @@ class CriminalSerializer(serializers.ModelSerializer):
                 'nationality', 'education_level', 'phone', 'crime_type', 'relegion', 'image', 
                 'status', 'created', 'updated']
 
+    def get_name(self, obj):
+        return obj.name
+
 
 class CaseSerializer(serializers.ModelSerializer):
     attached_to = CriminalSerializer(read_only=True)

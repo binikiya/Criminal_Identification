@@ -1,12 +1,12 @@
 from django.db import models
 from users.models import User
+from django.core.validators import RegexValidator
 
 
 class Criminal(models.Model):
     STATUS_CHOICES = (
-        ('active', 'Active'),
-        ('inactive', 'Inactive'),
-        ('banned', 'Banned'),
+        ('jailed', 'Jailed'),
+        ('released', 'Released'),
     )
 
     GENDER_CHOICES = (
@@ -19,15 +19,16 @@ class Criminal(models.Model):
     middle_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     dob = models.DateField()
-    age = models.DateField(null=True)
+    age = models.IntegerField(null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     nationality = models.CharField(max_length=50)
     education_level = models.CharField(max_length=40)
-    phone = models.CharField(max_length=15, null=True)
+    phone = models.CharField(max_length=15, null=True, validators=[RegexValidator(r'^\+?\d{9,15}$')])
+
     crime_type = models.CharField(max_length=30)
-    relegion = models.CharField(max_length=15)
+    religion = models.CharField(max_length=15)
     image = models.ImageField(upload_to='criminal_images/')
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='jailed')
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

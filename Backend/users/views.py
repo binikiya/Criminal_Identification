@@ -3,12 +3,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.contrib.auth.hashers import check_password
+from rest_framework import status
 from .models import User
-from .serializers import UserSerializer, PublicUserSerializer
+from .serializers import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    http_method_names = ['patch', 'get', 'put', 'delete']
+    http_method_names = ['patch', 'get', 'post', 'put', 'delete']
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated,]
 

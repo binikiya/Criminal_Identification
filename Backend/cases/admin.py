@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Criminal, Case
 
-# Register your models here.
+admin.site.register(Criminal)
+admin.site.register(Case)

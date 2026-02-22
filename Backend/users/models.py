@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.base_user import BaseUserManager
+from django.core.validators import RegexValidator
 
 
 class UserManager(BaseUserManager):
@@ -38,6 +39,7 @@ class User(AbstractUser, PermissionsMixin):
     ROLE_CHOICES = (
         ('admin', 'admin'),
         ('officer', 'officer'),
+        ('investigator', 'Investigator'),
         ('guest', 'guest'),
     )
 
@@ -58,14 +60,15 @@ class User(AbstractUser, PermissionsMixin):
     middle_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     dob = models.DateField()
-    age = models.DateField(null=True)
+    age = models.IntegerField(null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=15)
-    image = models.ImageField(upload_to='profile_images/')
+    phone = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?\d{9,15}$')])
+
+    image = models.ImageField(null=True, blank=True, upload_to='profile_images/')
 
     email_verified = models.BooleanField(default=False)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -73,7 +76,7 @@ class User(AbstractUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'dob']
 
     def __str__(self):
         return self.email
