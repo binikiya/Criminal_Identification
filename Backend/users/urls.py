@@ -1,8 +1,13 @@
 from rest_framework import routers
 from django.urls import path
-from .views import UserViewSet
+from .views import UserViewSet, RegisterViewSet, LoginViewSet, RefreshTokenViewSet
 
 router = routers.SimpleRouter()
+
+# Register, Login, and Refresh all viewsets
+router.register(r'register', RegisterViewSet, basename='register')
+router.register(r'login', LoginViewSet, basename='login')
+router.register(r'refresh', RefreshTokenViewSet, basename='refresh')
 
 router.register(r'', UserViewSet, basename='user')
 
