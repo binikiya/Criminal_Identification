@@ -1,4 +1,7 @@
-import { FaBell } from "react-icons/fa";
+import { FaUsers, FaBell, FaBuffer } from 'react-icons/fa';
+import { GiPoliceOfficerHead } from "react-icons/gi";
+import { TbViewfinder } from "react-icons/tb";
+import { FcApprove } from "react-icons/fc";
 
 function AdminDashboard() {
     return (
@@ -12,29 +15,47 @@ function AdminDashboard() {
             </header>
 
             <main className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <h2 className="text-lg font-semibold text-gray-700">Total Criminals</h2>
-                    <p className="text-3xl font-bold text-indigo-600">120</p>
+                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                    <div>
+                        <h2 className="text-lg font-semibold text-gray-700">Total Criminals</h2>
+                        <p className="text-3xl font-bold text-indigo-600">120</p>
+                    </div>
+                    <FaUsers className="text-indigo-600 text-4xl" />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <h2 className="text-lg font-semibold text-gray-700">Active Cases</h2>
-                    <p className="text-3xl font-bold text-indigo-600">45</p>
+                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                    <div>
+                        <h2 className="text-lg font-semibold text-gray-700">Active Cases</h2>
+                        <p className="text-3xl font-bold text-indigo-600">45</p>
+                    </div>
+                    <FaBuffer className="text-indigo-600 text-4xl" />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <h2 className="text-lg font-semibold text-gray-700">Active Officers</h2>
-                    <p className="text-3xl font-bold text-indigo-600">45</p>
+                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                    <div>
+                        <h2 className="text-lg font-semibold text-gray-700">Active Officers</h2>
+                        <p className="text-3xl font-bold text-indigo-600">45</p>
+                    </div>
+                    <GiPoliceOfficerHead className="text-indigo-600 text-4xl" />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <h2 className="text-lg font-semibold text-gray-700">Active Investigators</h2>
-                    <p className="text-3xl font-bold text-indigo-600">45</p>
+                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                    <div>
+                        <h2 className="text-lg font-semibold text-gray-700">Active Investigators</h2>
+                        <p className="text-3xl font-bold text-indigo-600">45</p>
+                    </div>
+                    <TbViewfinder className="text-indigo-600 text-4xl" />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <h2 className="text-lg font-semibold text-gray-700">Pending Approvals</h2>
-                    <p className="text-3xl font-bold text-indigo-600">45</p>
+                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                    <div>
+                        <h2 className="text-lg font-semibold text-gray-700">Pending Approvals</h2>
+                        <p className="text-3xl font-bold text-indigo-600">45</p>
+                    </div>
+                    <FcApprove className="text-indigo-600 text-4xl" />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <h2 className="text-lg font-semibold text-gray-700">Alerts</h2>
-                    <p className="text-3xl font-bold text-indigo-600">8</p>
+                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                    <div>
+                        <h2 className="text-lg font-semibold text-gray-700">Alerts</h2>
+                        <p className="text-3xl font-bold text-indigo-600">8</p>
+                    </div>
+                    <FaBell className="text-indigo-600 text-4xl" />
                 </div>
             </main>
         </div>

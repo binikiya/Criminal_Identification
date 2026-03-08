@@ -13,8 +13,3 @@ class MessageViewSet(viewsets.ModelViewSet):
         if self.request.user.is_superuser:
             return Message.objects.all()
         return Message.objects.filter(recipient=self.request.user)
-
-    def get_object(self):
-        obj = Message.objects.get_object_by_public_id(self.kwargs['pk'])
-        self.check_object_permissions(self.request, obj)
-        return obj

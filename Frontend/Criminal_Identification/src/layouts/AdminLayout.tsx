@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { FaChartBar, FaUser, FaBox, FaHeart, FaBell } from 'react-icons/fa';
+import { FaChartBar, FaUserShield, FaUser, FaBox, FaHeart, FaBell } from 'react-icons/fa';
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import { TbViewfinder } from "react-icons/tb";
 
@@ -8,6 +8,7 @@ const AdminLayout = () => {
 
     const menuItems = [
         { name: 'Dashboard', path: '/admin/dashboard', icon: <FaChartBar /> },
+        { name: 'Add User', path: '/admin/add-user', icon: <FaUserShield />},
         { name: 'Criminals', path: '/admin/criminals', icon: <FaBox /> },
         { name: 'Officers', path: '/admin/officers', icon: <GiPoliceOfficerHead />},
         { name: 'Investigators', path: '/admin/investigators', icon: <TbViewfinder />},
@@ -29,8 +30,8 @@ const AdminLayout = () => {
                             to={item.path}
                             className={`flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
                                 location.pathname === item.path 
-                                ? "bg-indigo-600 text-white" 
-                                : "text-slate-300 hover:bg-indigo-600 dark:hover:bg-white/5"
+                                ? "bg-indigo-600 text-white border-l-4 border-white" 
+                                : "text-slate-300 hover:bg-indigo-600"
                             }`}
                         >
                             {item.icon} {item.name}

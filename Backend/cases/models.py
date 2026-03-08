@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import User
 from django.core.validators import RegexValidator
+import uuid
 
 
 class Criminal(models.Model):
@@ -15,6 +16,7 @@ class Criminal(models.Model):
     )
 
     id = models.AutoField(primary_key=True)
+    random_id = models.CharField(max_length=50, unique=True, default=uuid.uuid4)
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -29,6 +31,7 @@ class Criminal(models.Model):
     religion = models.CharField(max_length=15)
     image = models.ImageField(upload_to='criminal_images/')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='jailed')
+    face_encoding = models.BinaryField(null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
