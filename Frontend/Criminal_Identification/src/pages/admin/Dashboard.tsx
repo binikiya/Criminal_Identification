@@ -1,65 +1,60 @@
-import { FaUsers, FaBell, FaBuffer } from 'react-icons/fa';
-import { GiPoliceOfficerHead } from "react-icons/gi";
-import { TbViewfinder } from "react-icons/tb";
-import { FcApprove } from "react-icons/fc";
+import { useEffect, useState } from 'react';
+import api from '../../api/api';
+import DashboardStats from '../../components/DashboardStats';
+import LiveWebcamScanner from '../../components/LiveWebcamScanner';
 
-function AdminDashboard() {
+const AdminDashboard = () => {
+    const [stats, setStats] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                api.get('/cases/dashboard-stats/')
+                    .then(res => setStats(res.data))
+                    .catch(err => console.error("Stats fetch error:", err));
+            }
+            catch (err) {
+                console.error("Failed to fetch dashboard metrics");
+            }
+            finally {
+                setLoading(false);
+            }
+        };
+        fetchStats();
+    }, []);
+
+    if (loading) return <div className="p-10 text-center font-bold text-indigo-600">Loading System Metrics...</div>;
+
     return (
-        <div className="animate-in fade-in duration-700">
-            <header className="bg-white shadow p-4 flex justify-between items-center">
-                <h1 className="text-xl font-semibold text-gray-700">Admin Dashboard</h1>
-                <div className="flex items-center space-x-4">
-                    <FaBell className="text-yellow-500 cursor-pointer" />
-                    <img src="/profile.jpg" alt="Profile" className="w-10 h-10 rounded-full border" />
-                </div>
+        <div className="space-y-8">
+            <header>
+                <h1 className="text-3xl font-black text-gray-800">Operational Command</h1>
+                <p className="text-gray-500">Real-time surveillance and case management overview.</p>
             </header>
 
-            <main className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-700">Total Criminals</h2>
-                        <p className="text-3xl font-bold text-indigo-600">120</p>
-                    </div>
-                    <FaUsers className="text-indigo-600 text-4xl" />
+            {/* The Summary Cards */}
+            <DashboardStats stats={stats} />
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Live Scanner - Takes up more space */}
+                <div className="lg:col-span-2">
+                    <h2 className="text-xl font-bold text-gray-700 mb-4">Field Identification</h2>
+                    <LiveWebcamScanner />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-700">Active Cases</h2>
-                        <p className="text-3xl font-bold text-indigo-600">45</p>
+
+                <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+                    <h2 className="text-xl font-bold text-gray-700 mb-4">System Alerts</h2>
+                    <div className="space-y-4">
+                        <div className="p-4 bg-orange-50 border-l-4 border-orange-500 rounded-r-xl">
+                            <p className="text-xs font-bold text-orange-600 uppercase">New Case</p>
+                            <p className="text-sm text-gray-700">Case #4492 attached to Subject "John Doe"</p>
+                        </div>
                     </div>
-                    <FaBuffer className="text-indigo-600 text-4xl" />
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-700">Active Officers</h2>
-                        <p className="text-3xl font-bold text-indigo-600">45</p>
-                    </div>
-                    <GiPoliceOfficerHead className="text-indigo-600 text-4xl" />
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-700">Active Investigators</h2>
-                        <p className="text-3xl font-bold text-indigo-600">45</p>
-                    </div>
-                    <TbViewfinder className="text-indigo-600 text-4xl" />
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-700">Pending Approvals</h2>
-                        <p className="text-3xl font-bold text-indigo-600">45</p>
-                    </div>
-                    <FcApprove className="text-indigo-600 text-4xl" />
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow flex items-center justify-between">
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-700">Alerts</h2>
-                        <p className="text-3xl font-bold text-indigo-600">8</p>
-                    </div>
-                    <FaBell className="text-indigo-600 text-4xl" />
-                </div>
-            </main>
+            </div>
         </div>
     );
-}
+};
 
 export default AdminDashboard;

@@ -1,13 +1,13 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { FaChartBar, FaSearch, FaBox, FaHeart, FaMapMarkerAlt, FaCreditCard, FaHistory, FaStar } from 'react-icons/fa';
+import { FaChartBar, FaSearch, FaPlus, FaHeart, FaMapMarkerAlt, FaCreditCard, FaHistory, FaStar } from 'react-icons/fa';
 
 const OfficerLayout = () => {
     const location = useLocation();
 
     const menuItems = [
         { name: 'Dashboard', path: '/officer/dashboard', icon: <FaChartBar /> },
-        { name: 'Monitor', path: '/officer/register', icon: <FaSearch /> },
-        { name: 'My Orders', path: '/customer/orders', icon: <FaBox /> },
+        { name: 'Monitor', path: '/officer/monitor', icon: <FaSearch /> },
+        { name: 'Register', path: '/officer/register', icon: <FaPlus /> },
         { name: 'Wishlist', path: '/customer/wishlist', icon: <FaHeart /> },
         { name: 'Booking History', path: '/customer/history', icon: <FaHistory /> },
         { name: 'My Reviews', path: '/customer/reviews', icon: <FaStar /> },

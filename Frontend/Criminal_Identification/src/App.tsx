@@ -6,7 +6,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import UserManagement from "./pages/admin/CreateUser";
+import CriminalList from "./pages/admin/AdminCriminal";
 import ProfilePage from "./pages/admin/AdminProfile";
+import AddCriminal from "./pages/AddCriminals";
 
 import OfficerLayout from "./layouts/OfficerLayout";
 import OfficerDashboard from "./pages/officer/Dashboard";
@@ -27,13 +29,15 @@ function App() {
           <Route element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-user" element={<UserManagement />} />
+            <Route path="/admin/criminals" element={<CriminalList />} />
             <Route path="/admin/profile" element={<ProfilePage />} />
+            <Route path="/admin/add-criminal" element={<AddCriminal />} />
           </Route>
         </Route>
         <Route element={<ProtectedRoute allowedRoles={['officer']} />}>
           <Route element={<OfficerLayout />}>
             <Route path="/officer/dashboard" element={<OfficerDashboard />} />
-            <Route path="/officer/register" element={<LiveWebcamScanner />} />
+            <Route path="/officer/monitor" element={<LiveWebcamScanner />} />
           </Route>
         </Route>
         <Route element={<ProtectedRoute allowedRoles={['investigator']} />}>

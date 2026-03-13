@@ -6,6 +6,8 @@ import uuid
 
 class Criminal(models.Model):
     STATUS_CHOICES = (
+        ('wanted', 'Wanted'),
+        ('under investigation', 'Under Investigation'),
         ('jailed', 'Jailed'),
         ('released', 'Released'),
     )
@@ -26,9 +28,10 @@ class Criminal(models.Model):
     nationality = models.CharField(max_length=50)
     education_level = models.CharField(max_length=40)
     phone = models.CharField(max_length=15, null=True, validators=[RegexValidator(r'^\+?\d{9,15}$')])
+    description = models.TextField()
 
     crime_type = models.CharField(max_length=30)
-    religion = models.CharField(max_length=15)
+    relegion = models.CharField(max_length=15)
     image = models.ImageField(upload_to='criminal_images/')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='jailed')
     face_encoding = models.BinaryField(null=True, blank=True)

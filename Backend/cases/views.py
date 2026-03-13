@@ -8,7 +8,18 @@ from recognition.recognition import FaceRecognitionService
 from .models import Criminal, Case
 from .serializers import CriminalSerializer, CaseSerializer
 from .permissions import IsAdminOrOfficer, IsInvestigatorOrReadOnly
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def dashboard_stats(request):
+    return Response({
+        'total_criminals': Criminal.objects.count(),
+        'jailed_count': Criminal.objects.filter(status='jailed').count(),
+        'open_cases': Case.objects.filter(status='open').count(),
+        'closed_cases': Case.objects.filter(status='closed').count(),
+    })
 
 
 class CriminalViewSet(viewsets.ModelViewSet):
