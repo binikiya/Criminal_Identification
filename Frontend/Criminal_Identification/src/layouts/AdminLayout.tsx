@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { FaChartBar, FaUserShield, FaUser, FaBox, FaHeart, FaBell } from 'react-icons/fa';
+import { FaChartBar, FaUserShield, FaUser, FaBox, FaHeart, FaBell, FaHistory } from 'react-icons/fa';
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import { TbViewfinder } from "react-icons/tb";
 
@@ -15,6 +15,7 @@ const AdminLayout = () => {
         { name: 'Cases', path: '/admin/cases', icon: <FaHeart /> },
         { name: 'Alerts', path: '/admin/alerts', icon: <FaBell /> },
         { name: 'My Profile', path: '/admin/profile', icon: <FaUser /> },
+        { name: 'Settings', path: '/admin/settings', icon: <FaHistory /> },
     ];
 
     return (

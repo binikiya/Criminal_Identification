@@ -9,13 +9,16 @@ const videoConstraints = {
     facingMode: "user"
 };
 
-const LiveWebcamScanner = () => {
+const LiveWebcamScanner = ({ onMatchFound }: { onMatchFound: (alert: any) => void }) => {
     const webcamRef = useRef<Webcam>(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
     const capture = useCallback(async () => {
+        const response = await api.post('/cases/criminals/recognize/', formData);
+
+        const result = response.data;
         if (!webcamRef.current) return;
         
         const imageSrc = webcamRef.current.getScreenshot();
@@ -34,12 +37,24 @@ const LiveWebcamScanner = () => {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setResult(response.data);
-        } catch (err: any) {
+        }
+        catch (err: any) {
             setError(err.response?.data?.error || "No match found in records.");
             setResult(null);
-        } finally {
+        }
+        finally {
             setLoading(false);
         }
+        if (result && result.confidence > 75) { // Threshold for alert
+            onMatchFound({
+                id: Date.now().toString(),
+                name: `${result.criminal.first_name} ${result.criminal.last_name}`,
+                status: result.criminal.status,
+                confidence: result.confidence,
+                timestamp: new Date().toLocaleTimeString()
+            });
+        }
+        setResult(result);
     }, [webcamRef]);
 
     return (

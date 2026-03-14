@@ -9,6 +9,11 @@ import UserManagement from "./pages/admin/CreateUser";
 import CriminalList from "./pages/admin/AdminCriminal";
 import ProfilePage from "./pages/admin/AdminProfile";
 import AddCriminal from "./pages/AddCriminals";
+import CriminalProfile from "./pages/admin/CriminalProfile";
+import AddCase from "./pages/admin/AddCase";
+import UserList from "./pages/admin/UserList";
+import CaseList from "./pages/admin/CaseList";
+import Settings from "./pages/admin/Settings";
 
 import OfficerLayout from "./layouts/OfficerLayout";
 import OfficerDashboard from "./pages/officer/Dashboard";
@@ -32,6 +37,12 @@ function App() {
             <Route path="/admin/criminals" element={<CriminalList />} />
             <Route path="/admin/profile" element={<ProfilePage />} />
             <Route path="/admin/add-criminal" element={<AddCriminal />} />
+            <Route path="/admin/criminals/:id" element={<CriminalProfile />} />
+            <Route path="/admin/criminals/:criminalId/add-case" element={<AddCase />} />
+            <Route path="/admin/officers" element={<UserList />} />
+            <Route path="/admin/investigators" element={<UserList />} />
+            <Route path="/admin/cases" element={<CaseList />} />
+            <Route path="/admin/settings" element={<Settings />} />
           </Route>
         </Route>
         <Route element={<ProtectedRoute allowedRoles={['officer']} />}>
