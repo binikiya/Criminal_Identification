@@ -1,7 +1,6 @@
 import { FaHistory, FaDownload, FaShieldAlt, FaKey, FaDatabase } from 'react-icons/fa';
 
 const Settings = () => {
-    // Mock login history
     const logs = [
         { id: 1, user: 'Admin User', action: 'System Login', ip: '192.168.1.45', time: '10 mins ago' },
         { id: 2, user: 'Officer Abebe', action: 'New Criminal Registered', ip: '192.168.1.12', time: '2 hours ago' },
@@ -16,7 +15,6 @@ const Settings = () => {
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Audit Logs */}
                 <div className="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="p-6 border-b border-gray-50 flex items-center justify-between">
                         <h2 className="text-lg font-black text-gray-800 uppercase flex items-center gap-2">

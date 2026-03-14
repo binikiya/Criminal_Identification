@@ -1,10 +1,12 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { FaChartBar, FaUserShield, FaUser, FaBox, FaHeart, FaBell, FaHistory } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { FaChartBar, FaUserShield, FaUser, FaBox, FaHeart, FaBell, FaHistory, FaSignOutAlt } from 'react-icons/fa';
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import { TbViewfinder } from "react-icons/tb";
 
 const AdminLayout = () => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const menuItems = [
         { name: 'Dashboard', path: '/admin/dashboard', icon: <FaChartBar /> },
@@ -18,11 +20,19 @@ const AdminLayout = () => {
         { name: 'Settings', path: '/admin/settings', icon: <FaHistory /> },
     ];
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('userRole');
+
+        navigate('/');
+    };
+
     return (
-        <div className="flex h-screen bg-gray-100">
-            <aside className="w-64 bg-indigo-700 text-white flex flex-col">
-                <div className="p-4 text-2xl font-bold border-b border-indigo-600">
-                    Criminal ID System
+        <div className="flex h-screen bg-gray-50">
+            <aside className="w-64 bg-indigo-900 text-white flex flex-col">
+                <div className="p-6 font-black text-xl tracking-tighter border-b border-indigo-800">
+                    CRIMINAL ID <span className="text-indigo-400">PRO</span>
                 </div>
                 <nav className="flex-1 p-4 space-y-2">
                     {menuItems.map((item) => (
@@ -39,6 +49,11 @@ const AdminLayout = () => {
                         </Link>
                     ))}
                 </nav>
+                <div className="p-4 border-t border-indigo-800">
+                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-red-300 hover:bg-red-500/10 hover:text-red-400 rounded-xl font-bold transition-all uppercase text-xs tracking-widest">
+                        <FaSignOutAlt /> Sign Out
+                    </button>
+                </div>
             </aside>
 
             <main className="flex-1 p-6 md:p-10">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaUserShield, FaSearch, FaFilter, FaUserPlus, FaEnvelope, FaPhone, FaUserEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaSearch, FaFilter, FaUserPlus, FaEnvelope, FaPhone, FaUserEdit, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import api from '../../api/api';
 
@@ -12,12 +12,13 @@ const UserList = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                // Assuming your backend has a /users/ endpoint that returns staff
                 const response = await api.get('/users/');
                 setUsers(response.data);
-            } catch (err) {
+            }
+            catch (err) {
                 console.error("Error fetching staff records:", err);
-            } finally {
+            }
+            finally {
                 setLoading(false);
             }
         };
@@ -52,7 +53,6 @@ const UserList = () => {
                 </Link>
             </header>
 
-            {/* Search & Role Filter */}
             <div className="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
                 <div className="relative flex-1">
                     <FaSearch className="absolute left-4 top-3.5 text-gray-400" />
